@@ -2,7 +2,8 @@
 
 from flask import Flask
 from flask import jsonify
-app = Flask(__name__)
+from flask import request
+app = Flask(__name__,  static_url_path='')
 import requests
 
 """
@@ -95,6 +96,10 @@ def character_information_route(character_names):
     processed_data = process_character_losses(character_id_map, character_losses)
 
     return jsonify(processed_data)
+
+@app.route('/lookup')
+def root():
+    return app.send_static_file('lookup.html')
 
 if __name__ == "__main__":
     app.run()
