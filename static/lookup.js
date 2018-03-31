@@ -1,6 +1,6 @@
-document.addEventListener('paste', function (e) {
-	lookupCharacters()
-}, false);
+// document.addEventListener('paste', function (e) {
+// 	lookupCharacters()
+// }, false);
 
 function getCommaSeparatedCharacters() {
     var characters = ""
@@ -29,20 +29,29 @@ function updateResults(jsonResponse) {
         resultsText += killmailInfo['item_discovered'] + "\n"
         resultsText += "\n"
     }
-
-    document.getElementById('results').innerHTML = resultsText;
+    if(resultsText == "") {
+        resultsText = "Local appears to be safe"
+        console.log(resultsText)
+    }
+    console.log(resultsText)
+    document.getElementById('results').innerHTML = resultsText
 }
 
 function lookupCharacters() {
     var characterString = getCommaSeparatedCharacters()
     if(characterString == "") {
-        return
+        document.getElementById('results').innerHTML = "Invalid character input..."
+        console.log("oops")
     }
+
+    document.getElementById('results').innerHTML = "Processing..."
+    console.log("processing")
+
     var url = "http://127.0.0.1:5000/characters/information/" + characterString
 
     fetch(url)
         .then(function(response) {
-            return response.json();
+            return response.json()
         })
         .then(function(jsonResponse) {
             updateResults(jsonResponse)

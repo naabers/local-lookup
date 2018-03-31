@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 
-from flask import Flask
-from flask import jsonify
-from flask import request
-app = Flask(__name__,  static_url_path='')
 import requests
+from flask import Flask, jsonify
+app = Flask(__name__, static_url_path='')
 
 """
 Items:
