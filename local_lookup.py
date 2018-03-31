@@ -2,6 +2,7 @@
 
 import requests
 from flask import Flask, jsonify
+from xml.etree import ElementTree
 app = Flask(__name__, static_url_path='')
 
 """
@@ -27,24 +28,17 @@ def get_scary_item_name(item_type_id):
 
 def get_character_ids(character_names):
     character_id_map = {}
-    for character_name in character_names:
-        try:
-            character_id = get_character_id(character_name)
-            character_id_map[character_id] = character_name
-        except:
-            pass
-    return character_id_map
+    character_name_csv = ",".join(character_names)
 
-def get_character_id(character_name):
-    url = "https://esi.tech.ccp.is/latest/search/?categories=character&search=" + character_name + "&strict=true"
+    url = "https://api.eveonline.com/eve/CharacterID.xml.aspx?names=" + character_name_csv
     search_results = requests.get(url)
-
-    character_id = ""
-    try:
-        character_id = search_results.json()["character"][0]
-    except KeyError:
-        print("unable to find character with name '%s'" % character_name)
-    return character_id
+    root = ElementTree.fromstring(search_results.content)
+    rowset = root.find('.//rowset[@name="characters"]')
+    for row in rowset.findall("row"):
+        character_name = row.get('name')
+        character_id = int(row.get('characterID'))
+        character_id_map[character_id] = character_name
+    return character_id_map
 
 def get_character_losses(character_id_map):
     #take the keys for the dictionary as a list
