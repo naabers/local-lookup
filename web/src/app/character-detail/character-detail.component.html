@@ -1,0 +1,11 @@
+<div *ngIf="character">
+  <h2>Details</h2>
+  <div><span>Name: </span>{{character.name}}</div>
+  <div><span>ID: </span>{{character.id}}</div>
+  <div><span>Scary: </span>{{character.scary}}</div>
+  <ul class="character-detail">
+    <li *ngFor="let ship of character.cyno_ships">
+        <span class="badge">{{ship}}</span>
+    </li>
+  </ul>
+</div>

@@ -1,1 +1,31 @@
 service/__pycache__
+
+# compiled output
+web/dist
+web/tmp
+web/out-tsc
+
+# dependencies
+web/node_modules
+
+# e2e
+web/e2e/*.json
+web/e2e/*.ts
+web/e2e/*.js
+web/e2e/*.map
+
+# IDEs and editors
+.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json

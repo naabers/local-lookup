@@ -1,0 +1,14 @@
+<div>
+    <textarea [(ngModel)]="characterInput" placeholder="Paste local chat here for lookup..." rows="10" cols="100"></textarea>
+  <br>
+  <button (click)="lookupCharacters()">Lookup</button>
+</div>
+
+<h2>Looked Up Characters</h2>
+<ul class="characters">
+  <li *ngFor="let character of characters" (click)="onSelect(character)">
+      <span class="badge">{{character.name}}</span> {{character.id}}
+  </li>
+</ul>
+
+<app-character-detail [character]="selectedCharacter"></app-character-detail>
