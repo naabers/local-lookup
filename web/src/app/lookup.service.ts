@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { Character } from './character';
-import { CHARACTERS } from './mock-characters';
 
 @Injectable()
 export class LookupService {

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Character } from '../character';
 import { LookupService } from '../lookup.service';
-import { CHARACTERS } from '../mock-characters';
 
 @Component({
   selector: 'app-characters',
