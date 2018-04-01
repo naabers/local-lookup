@@ -1,14 +1,6 @@
-# local-lookup
+# local-lookup service
 
-Requires:
-Flask
-requests
+backend service can be found in the service directory. Its a python flask based web service.
 
-How to Run:
-./local_lookup.py
-
-How to make a client request:
-http://127.0.0.1:5000/characters/information/naabers,Liten%20Lorian
-
-Can also navigate to:
-http://127.0.0.1:5000/lookup
+web frontend can be found in the web directory. It 
+is angularjs
