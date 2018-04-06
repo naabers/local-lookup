@@ -2,7 +2,10 @@
 
 from flask import Flask, jsonify
 from flask_cors import CORS
-from eve import EveApi
+
+import character
+import eve
+import zkill
 
 app = Flask(__name__)
 CORS(app)
@@ -10,20 +13,24 @@ CORS(app)
 @app.route("/characters/information/<character_names>")
 def character_information_route(character_names):
     print(character_names)
-    api = EveApi()
 
     character_names = character_names.split(",")
-    characters = api.get_characters(character_names)
+    character_name_map = eve.get_characters(character_names)
 
-    character_losses = api.get_character_losses(characters)
-    for character_id, character_loss_map in character_losses.items():
-        for character in characters:
-            if character.id == character_id:
-                character.set_losses(character_loss_map)
+    characters = []
+    for character_name, character_id in character_name_map.items():
+        character_obj = character.Character(character_id, character_name)
+        characters.append(character_obj)
+
+    killmails = zkill.get_character_losses(characters)
+    for killmail in killmails:
+        for character_obj in characters:
+            if character_obj.id == killmail.victim_id:
+                character_obj.losses.append(killmail)
 
     processed_data = []
-    for character in characters:
-        processed_data.append(character.get_info())
+    for character_obj in characters:
+        processed_data.append(character_obj.get_info())
 
     return jsonify(processed_data)
 
