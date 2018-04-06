@@ -5,10 +5,34 @@
 </div>
 
 <h2>Looked Up Characters</h2>
-<ul class="characters">
-  <li *ngFor="let character of characters" (click)="onSelect(character)">
-      <span class="badge">{{character.name}}</span> {{character.id}}
-  </li>
-</ul>
+<table class="characters">
+  <div *ngFor="let character of characters">
+    <tr [ngClass]="getCharacterClass(character)" (click)="onSelect(character)">
+        <td>{{ character.name }}</td>
+        <td><a href="https://zkillboard.com/character/{{ character.id }}/">zkillboard</a></td>
+
+        <!--
+        <td>
+          {% if character.cynos %}<b>{% endif %}
+          Cynos: {{ character.cynos }}
+          {% if character.cynos %}</b>{% endif %}
+        </td> 
+        <td>Ratting: {{ character.ratting }}</td>
+        <td>1b+ Ratting: {{ character.expensive_ratting }}</td>
+        <td>
+            {% if character.carriers %}<b>{% endif %}
+            Carriers: {{ character.carriers }}
+            {% if character.carriers %}</b>{% endif %}
+        </td>
+        <td>
+            {% if character.blops_killed %}<b>{% endif %}
+            BLOPS Kills: {{ character.blops_killed }}
+            {% if character.blops_killeds %}</b>{% endif %}
+        </td>
+        -->
+
+    </tr>
+  </div>
+</table>
 
 <app-character-detail [character]="selectedCharacter"></app-character-detail>

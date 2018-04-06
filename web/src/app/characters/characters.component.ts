@@ -31,6 +31,13 @@ export class CharactersComponent implements OnInit {
     .subscribe(characters => this.characters = characters);
   }
 
+  getCharacterClass(character: Character): String {
+    if(character.scary == true) {
+      return "table-danger"
+    }
+    return "table-light"
+  }
+
   onSelect(character: Character): void {
     this.selectedCharacter = character;
   }
