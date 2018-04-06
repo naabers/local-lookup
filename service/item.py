@@ -8,11 +8,15 @@ class Item(object):
         self.id = item_id
         self.name = ""
         self.scary = False
+        self.cyno = False
+
         if self.id == 21096:
             self.scary = True
+            self.cyno = True
             self.name = "cyno"
         elif self.id == 28646:
             self.scary = True
+            self.cyno = True
             self.name = "covert cyno"
 
     def is_important(self):
@@ -22,4 +26,5 @@ class Item(object):
         json_info = {}
         json_info["name"] = self.name
         json_info["scary"] = self.scary
+        json_info["cyno"] = self.cyno
         return json_info

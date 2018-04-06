@@ -2,6 +2,9 @@ import item
 
 import eve
 
+CARRIERS = [23919, 23917, 23915, 23913, 23911, 24483, 22852, 23757]
+BLOPS = [22436, 22430, 22428, 22440]
+
 class Killmail(object):
 
     def __init__(self, raw_mail):
