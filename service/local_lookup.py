@@ -10,6 +10,19 @@ import zkill
 app = Flask(__name__)
 CORS(app)
 
+def process_killmails(characters, killmails):
+    character_map = {}
+    for character_obj in characters:
+        character_map[character_obj.id] = character_obj
+
+    for killmail in killmails:
+        if killmail.victim_id in character_map:
+            character_map[killmail.victim_id].losses.append(killmail)
+        else:
+            for attacker_id in killmail.attackers:
+                if attacker_id in character_map:
+                    character_map[attacker_id].kills.append(killmail)
+
 @app.route("/characters/information/<character_names>")
 def character_information_route(character_names):
     print(character_names)
@@ -22,11 +35,9 @@ def character_information_route(character_names):
         character_obj = character.Character(character_id, character_name)
         characters.append(character_obj)
 
-    killmails = zkill.get_character_losses(characters)
-    for killmail in killmails:
-        for character_obj in characters:
-            if character_obj.id == killmail.victim_id:
-                character_obj.losses.append(killmail)
+    # killmails = zkill.get_character_losses(characters)
+    killmails = zkill.get_character_kills_and_losses(characters)
+    process_killmails(characters, killmails)
 
     processed_data = []
     for character_obj in characters:

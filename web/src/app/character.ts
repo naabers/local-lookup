@@ -1,6 +1,10 @@
 export class Character {
   id: number;
   name: string;
-  cyno_ships: Array<string>;
+  important_kills: Array<string>;
+  important_losses: Array<string>;
   scary: boolean;
+  blops_kill_count: number;
+  carrier_loss_count: number;
+  cyno_loss_count: number;
 }

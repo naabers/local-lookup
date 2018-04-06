@@ -3,36 +3,26 @@
   <br>
   <button (click)="lookupCharacters()">Lookup</button>
 </div>
-
-<h2>Looked Up Characters</h2>
-<table class="characters">
-  <div *ngFor="let character of characters">
-    <tr [ngClass]="getCharacterClass(character)" (click)="onSelect(character)">
-        <td>{{ character.name }}</td>
-        <td><a href="https://zkillboard.com/character/{{ character.id }}/">zkillboard</a></td>
-
-        <!--
-        <td>
-          {% if character.cynos %}<b>{% endif %}
-          Cynos: {{ character.cynos }}
-          {% if character.cynos %}</b>{% endif %}
-        </td> 
-        <td>Ratting: {{ character.ratting }}</td>
-        <td>1b+ Ratting: {{ character.expensive_ratting }}</td>
-        <td>
-            {% if character.carriers %}<b>{% endif %}
-            Carriers: {{ character.carriers }}
-            {% if character.carriers %}</b>{% endif %}
-        </td>
-        <td>
-            {% if character.blops_killed %}<b>{% endif %}
-            BLOPS Kills: {{ character.blops_killed }}
-            {% if character.blops_killeds %}</b>{% endif %}
-        </td>
-        -->
-
+<br>
+<table  class="table">
+  <thead>
+    <tr>
+      <th scope="col">Character</th>
+      <th scope="col">Zkillboard</th>
+      <th scope="col">Blops Kills</th>
+      <th scope="col">Cyno Losses</th>
+      <th scope="col">Carrier Losses</th>
     </tr>
-  </div>
+  </thead>
+  <tbody>
+      <tr *ngFor="let character of characters" [ngClass]="getCharacterClass(character)" (click)="onSelect(character)">
+          <th>{{ character.name }}</th>
+          <td><a href="https://zkillboard.com/character/{{ character.id }}/">link</a></td>
+          <td>{{ character.blops_kill_count }}</td>
+          <td>{{ character.cyno_loss_count }}</td>
+          <td>{{ character.carrier_loss_count }}</td>
+      </tr>
+  </tbody>
 </table>
 
 <app-character-detail [character]="selectedCharacter"></app-character-detail>

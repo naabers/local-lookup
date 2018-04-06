@@ -35,6 +35,9 @@ export class CharactersComponent implements OnInit {
     if(character.scary == true) {
       return "table-danger"
     }
+    if(character.carrier_loss_count > 0) {
+      return "table-success"
+    }
     return "table-light"
   }
 

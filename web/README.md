@@ -1,5 +1,13 @@
 # local-lookup web
 
+## First time setup
+Verify that you are running at least node 6.9.x and npm 3.x.x by running node -v and npm -v
+npm install -g @angular/cli
+npm install
+ng serve
+
+## General
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
 
 It followed this tutorial originally:

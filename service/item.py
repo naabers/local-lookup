@@ -19,6 +19,11 @@ class Item(object):
             self.cyno = True
             self.name = "covert cyno"
 
+    def is_cyno(self):
+        if self.id == 21096 or self.id == 28646:
+            return True
+        return False
+
     def is_important(self):
         return self.scary
 

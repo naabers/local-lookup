@@ -11,7 +11,21 @@ class Killmail(object):
         self.victim_id = raw_mail["victim"]["character_id"]
         self.ship_id = raw_mail["victim"]["ship_type_id"]
 
+        self.attackers = []
+        for attacker in raw_mail["attackers"]:
+            attacker_id = attacker.get("character_id")
+            if attacker_id != None:
+                self.attackers.append(attacker_id)
+
         self.ship_name = eve.get_ship_name(self.ship_id)
+
+        self.blops = False
+        if self.ship_id in BLOPS:
+            self.blops = True
+
+        self.carrier = False
+        if self.ship_id in CARRIERS:
+            self.carrier = True
 
         self.items = []
         self.__process_items(raw_mail)
@@ -22,13 +36,26 @@ class Killmail(object):
             item_obj = item.Item(raw_item["item_type_id"])
             self.items.append(item_obj)
 
-    #can later add to this for ship types, etc
-    def is_important(self):
+    def is_important_loss(self):
+        if self.had_cyno():
+            return True
+        if self.carrier:
+            return True
+        return False
+
+    def is_important_kill(self):
+        if self.blops:
+            return True
+        return False
+
+    def had_cyno(self):
         for item_obj in self.items:
-            if item_obj.scary:
+            if item_obj.is_cyno():
                 return True
         return False
 
+    #currently carrier and blops kills are not marked as scary
+    #not sure how we want to handle things
     def get_info(self):
         json_info = {}
 
