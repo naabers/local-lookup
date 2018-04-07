@@ -8,10 +8,17 @@ BLOPS = [22436, 22430, 22428, 22440]
 class Killmail(object):
 
     def __init__(self, raw_mail):
-        self.victim_id = raw_mail["victim"]["character_id"]
-        self.ship_id = raw_mail["victim"]["ship_type_id"]
-
+        self.victim_id = raw_mail["victim"].get("character_id")
+        self.ship_id = raw_mail["victim"].get("ship_type_id")
+        self.npc_kill = False
+        self.blops = False
+        self.carrier = False
         self.attackers = []
+        self.items = []
+
+        if self.victim_id == None:
+            self.npc_kill = True
+
         for attacker in raw_mail["attackers"]:
             attacker_id = attacker.get("character_id")
             if attacker_id != None:
@@ -19,15 +26,12 @@ class Killmail(object):
 
         self.ship_name = eve.get_ship_name(self.ship_id)
 
-        self.blops = False
         if self.ship_id in BLOPS:
             self.blops = True
 
-        self.carrier = False
         if self.ship_id in CARRIERS:
             self.carrier = True
 
-        self.items = []
         self.__process_items(raw_mail)
 
     def __process_items(self, raw_mail):
