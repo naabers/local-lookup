@@ -4,16 +4,14 @@ import requests
 
 import killmail
 
-#takes in a list of character.Characters
+#takes in a map of character ids to names
 #returns a list of killmail.Killmail
 @cache(time=5)
-def get_character_killmails(characters):
+def get_character_killmails(character_id_map):
     mails = []
 
     #zkillboard requires the ids to be sorted for its api
-    character_ids = []
-    for character in characters:
-        character_ids.append(character.id)
+    character_ids = list(character_id_map)
     character_ids.sort()
 
     character_id_str = ",".join(str(i) for i in character_ids)

@@ -28,7 +28,7 @@ def get_character_information(character_names):
         character_obj = character.Character(character_id, character_name)
         characters.append(character_obj)
 
-    killmails = zkill.get_character_killmails(characters)
+    killmails = zkill.get_character_killmails(character_id_map)
     process_killmails(characters, killmails)
 
     processed_data = []
