@@ -1,4 +1,3 @@
-import eve
 
 class Character(object):
 
@@ -13,6 +12,7 @@ class Character(object):
         self.carrier_loss_count = 0
         self.blops_kill_count = 0
 
+
     def update_kill_and_loss_counts(self):
         for kill in self.kills:
             if kill.blops:
@@ -23,6 +23,7 @@ class Character(object):
                 self.carrier_loss_count += 1
             if loss.had_cyno():
                 self.cyno_loss_count += 1
+
 
     def get_info(self):
         self.update_kill_and_loss_counts()

@@ -4,6 +4,7 @@ Requires:
 Flask
 flask-cors
 requests
+python-memcached
 
 How to Run:
 ./local_lookup.py

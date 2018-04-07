@@ -1,14 +1,7 @@
-#!/usr/bin/env python3
-
-from flask import Flask, jsonify
-from flask_cors import CORS
-
 import character
-import eve
+import eve_xml
 import zkill
 
-app = Flask(__name__)
-CORS(app)
 
 def process_killmails(characters, killmails):
     character_map = {}
@@ -23,27 +16,23 @@ def process_killmails(characters, killmails):
                 if attacker_id in character_map:
                     character_map[attacker_id].kills.append(killmail)
 
-@app.route("/characters/information/<character_names>")
-def character_information_route(character_names):
+
+def get_character_information(character_names):
     print(character_names)
 
     character_names = character_names.split(",")
-    character_name_map = eve.get_characters(character_names)
+    character_id_map = eve_xml.get_character_ids(character_names)
 
     characters = []
-    for character_name, character_id in character_name_map.items():
+    for character_id, character_name in character_id_map.items():
         character_obj = character.Character(character_id, character_name)
         characters.append(character_obj)
 
-    # killmails = zkill.get_character_losses(characters)
-    killmails = zkill.get_character_kills_and_losses(characters)
+    killmails = zkill.get_character_killmails(characters)
     process_killmails(characters, killmails)
 
     processed_data = []
     for character_obj in characters:
         processed_data.append(character_obj.get_info())
 
-    return jsonify(processed_data)
-
-if __name__ == "__main__":
-    app.run()
+    return processed_data

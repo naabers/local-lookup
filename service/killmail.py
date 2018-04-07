@@ -1,6 +1,6 @@
 import item
 
-import eve
+import esi
 
 CARRIERS = [23919, 23917, 23915, 23913, 23911, 24483, 22852, 23757]
 BLOPS = [22436, 22430, 22428, 22440]
@@ -24,7 +24,7 @@ class Killmail(object):
             if attacker_id != None:
                 self.attackers.append(attacker_id)
 
-        self.ship_name = eve.get_ship_name(self.ship_id)
+        self.ship_name = esi.get_ship_name(self.ship_id)
 
         if self.ship_id in BLOPS:
             self.blops = True
@@ -34,11 +34,13 @@ class Killmail(object):
 
         self.__process_items(raw_mail)
 
+
     def __process_items(self, raw_mail):
         raw_victim = raw_mail["victim"]
         for raw_item in raw_victim["items"]:
             item_obj = item.Item(raw_item["item_type_id"])
             self.items.append(item_obj)
+
 
     def is_important_loss(self):
         if self.had_cyno():
@@ -47,16 +49,19 @@ class Killmail(object):
             return True
         return False
 
+
     def is_important_kill(self):
         if self.blops:
             return True
         return False
+
 
     def had_cyno(self):
         for item_obj in self.items:
             if item_obj.is_cyno():
                 return True
         return False
+
 
     #currently carrier and blops kills are not marked as scary
     #not sure how we want to handle things
