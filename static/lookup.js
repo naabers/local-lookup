@@ -47,7 +47,7 @@ function lookupCharacters() {
     document.getElementById('results').innerHTML = "Processing..."
     console.log("processing")
 
-    var url = "http://127.0.0.1:5000/characters/information/" + characterString
+    var url = "/characters/information/" + characterString
 
     fetch(url)
         .then(function(response) {
