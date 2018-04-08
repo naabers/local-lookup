@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 
-import local_lookup
+from local_lookup import local_lookup
 
 app = Flask(__name__)
 CORS(app)

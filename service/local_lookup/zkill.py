@@ -1,8 +1,8 @@
-from cache import cache
-
 import requests
 
-import killmail
+from .cache import cache
+from . import killmail
+
 
 #takes in a map of character ids to names
 #returns a list of killmail.Killmail

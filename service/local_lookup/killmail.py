@@ -1,6 +1,6 @@
-import item
 
-import esi
+from . import esi
+from . import item
 
 CARRIERS = [23919, 23917, 23915, 23913, 23911, 24483, 22852, 23757]
 BLOPS = [22436, 22430, 22428, 22440]

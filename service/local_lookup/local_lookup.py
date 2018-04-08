@@ -1,6 +1,6 @@
-import character
-import eve_xml
-import zkill
+from . import character
+from . import eve_xml
+from . import zkill
 
 
 def process_killmails(characters, killmails):

@@ -1,4 +1,4 @@
-from cache import CACHE
+from .cache import CACHE
 
 import requests
 from xml.etree import ElementTree
