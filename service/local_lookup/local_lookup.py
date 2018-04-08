@@ -18,8 +18,6 @@ def process_killmails(characters, killmails):
 
 
 def get_character_information(character_names):
-    print(character_names)
-
     character_names = character_names.split(",")
     character_id_map = eve_xml.get_character_ids(character_names)
 
