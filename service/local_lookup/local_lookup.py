@@ -1,5 +1,5 @@
 from . import character
-from . import eve_xml
+from . import esi
 from . import zkill
 
 
@@ -19,7 +19,7 @@ def process_killmails(characters, killmails):
 
 def get_character_information(character_names):
     character_names = character_names.split(",")
-    character_id_map = eve_xml.get_character_ids(character_names)
+    character_id_map = esi.get_character_ids(character_names)
 
     characters = []
     for character_id, character_name in character_id_map.items():
