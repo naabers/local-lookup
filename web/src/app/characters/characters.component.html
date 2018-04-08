@@ -1,0 +1,28 @@
+<div>
+    <textarea [(ngModel)]="characterInput" placeholder="Paste local chat here for lookup..." rows="10" cols="100"></textarea>
+  <br>
+  <button (click)="lookupCharacters()">Lookup</button>
+</div>
+<br>
+<table  class="table">
+  <thead>
+    <tr>
+      <th scope="col">Character</th>
+      <th scope="col">Zkillboard</th>
+      <th scope="col">Blops Kills</th>
+      <th scope="col">Cyno Losses</th>
+      <th scope="col">Carrier Losses</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let character of characters" [ngClass]="getCharacterClass(character)" (click)="onSelect(character)">
+          <th>{{ character.name }}</th>
+          <td><a href="https://zkillboard.com/character/{{ character.id }}/">link</a></td>
+          <td>{{ character.blops_kill_count }}</td>
+          <td>{{ character.cyno_loss_count }}</td>
+          <td>{{ character.carrier_loss_count }}</td>
+      </tr>
+  </tbody>
+</table>
+
+<app-character-detail [character]="selectedCharacter"></app-character-detail>
