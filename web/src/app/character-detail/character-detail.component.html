@@ -8,6 +8,7 @@
     <thead>
       <tr>
         <th scope="col">Ship</th>
+        <th scope="col">Date / Time</th>
         <th scope="col">Zkillboard</th>
         <th scope="col">Importance</th>
       </tr>
@@ -15,11 +16,13 @@
     <tbody>
         <tr *ngFor="let loss of character.important_losses" [ngClass]="getKillmailClass(loss)">
             <th>{{ loss.ship_name }}</th>
+            <th>{{ loss.killmail_time }}</th>
             <td><a href="https://zkillboard.com/kill/{{ loss.killmail_id }}/">link</a></td>
             <td>{{ getImportance(loss) }}</td>
         </tr>
         <tr *ngFor="let kill of character.important_kills" [ngClass]="getKillmailClass(kill)">
           <th>{{ kill.ship_name }}</th>
+          <th>{{ kill.killmail_time }}</th>
           <td><a href="https://zkillboard.com/kill/{{ kill.killmail_id }}/">link</a></td>
           <td>{{ getImportance(kill) }}</td>
       </tr>

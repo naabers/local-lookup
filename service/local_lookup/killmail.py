@@ -9,6 +9,7 @@ class Killmail(object):
 
     def __init__(self, raw_mail):
         self.killmail_id = raw_mail.get("killmail_id")
+        self.killmail_time = raw_mail.get("killmail_time")
         self.victim_id = raw_mail["victim"].get("character_id")
         self.ship_id = raw_mail["victim"].get("ship_type_id")
         self.npc_kill = False
@@ -69,6 +70,7 @@ class Killmail(object):
     def get_info(self):
         json_info = {}
         json_info["killmail_id"] = self.killmail_id
+        json_info["killmail_time"] = self.killmail_time
         json_info["ship_name"] = self.ship_name
         json_info["scary"] = False
         json_info["blops"] = self.blops
