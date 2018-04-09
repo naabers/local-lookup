@@ -3,9 +3,27 @@
   <div><span>Name: </span>{{character.name}}</div>
   <div><span>ID: </span>{{character.id}}</div>
   <div><span>Scary: </span>{{character.scary}}</div>
-  <ul class="character-detail">
-    <li *ngFor="let loss of character.important_losses">
-        <span class="badge">{{loss.ship_name}}</span>
-    </li>
-  </ul>
+
+  <table  class="table">
+    <thead>
+      <tr>
+        <th scope="col">Ship</th>
+        <th scope="col">Zkillboard</th>
+        <th scope="col">Importance</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let loss of character.important_losses" [ngClass]="getKillmailClass(loss)">
+            <th>{{ loss.ship_name }}</th>
+            <td><a href="https://zkillboard.com/kill/{{ loss.killmail_id }}/">link</a></td>
+            <td>{{ getImportance(loss) }}</td>
+        </tr>
+        <tr *ngFor="let kill of character.important_kills" [ngClass]="getKillmailClass(kill)">
+          <th>{{ kill.ship_name }}</th>
+          <td><a href="https://zkillboard.com/kill/{{ kill.killmail_id }}/">link</a></td>
+          <td>{{ getImportance(kill) }}</td>
+      </tr>
+    </tbody>
+  </table>
+
 </div>
