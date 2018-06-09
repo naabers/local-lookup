@@ -9,6 +9,7 @@ class Item(object):
         self.name = ""
         self.scary = False
         self.cyno = False
+        self.covert_cyno = False
 
         if self.id == 21096:
             self.scary = True
@@ -16,7 +17,7 @@ class Item(object):
             self.name = "cyno"
         elif self.id == 28646:
             self.scary = True
-            self.cyno = True
+            self.covert_cyno = True
             self.name = "covert cyno"
 
 
@@ -35,4 +36,5 @@ class Item(object):
         json_info["name"] = self.name
         json_info["scary"] = self.scary
         json_info["cyno"] = self.cyno
+        json_info["covert_cyno"] = self.covert_cyno
         return json_info

@@ -18,6 +18,11 @@ export class CharactersComponent implements OnInit {
   }
 
   lookupCharacters(): void {
+    if(this.characters != null) {
+      this.characters.length = 0
+      this.selectedCharacter = null
+    }
+
     console.log(this.characterInput)
     var characterInputArray = []
     var tempCharacterInputArray = this.characterInput.split('\n');

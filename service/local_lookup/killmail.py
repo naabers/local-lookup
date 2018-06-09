@@ -8,6 +8,8 @@ BLOPS = [22436, 22430, 22428, 22440, 44996]
 class Killmail(object):
 
     def __init__(self, raw_mail):
+        self.killmail_id = raw_mail.get("killmail_id")
+        self.killmail_time = raw_mail.get("killmail_time")
         self.victim_id = raw_mail["victim"].get("character_id")
         self.ship_id = raw_mail["victim"].get("ship_type_id")
         self.npc_kill = False
@@ -67,15 +69,20 @@ class Killmail(object):
     #not sure how we want to handle things
     def get_info(self):
         json_info = {}
-
+        json_info["killmail_id"] = self.killmail_id
+        json_info["killmail_time"] = self.killmail_time
         json_info["ship_name"] = self.ship_name
         json_info["scary"] = False
-
+        json_info["blops"] = self.blops
+        json_info["carrier"] = self.carrier
         important_items_info = []
         for item_obj in self.items:
             if item_obj.is_important():
                 json_info["scary"] = True
                 important_items_info.append(item_obj.get_info())
+
+        if self.blops:
+            json_info["scary"] = True
 
         json_info["important_items"] = important_items_info
 
