@@ -9,6 +9,7 @@ def get_ship_name(ship_type_id):
 
     return search_results.json()["name"]
 
+
 @cache()
 #takes in a list of character names
 #returns a map of character id to name
